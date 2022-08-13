@@ -1,3 +1,5 @@
-const App = () => <div className='App'>Hello world</div>
+import AllRoutes from 'routes'
+
+const App = () => <AllRoutes />
 
 export default App
