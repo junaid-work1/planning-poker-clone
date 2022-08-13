@@ -11,6 +11,9 @@ const customStyles = {
     top: '50%',
     transform: 'translate(-50%, -50%)',
     width: '40%'
+  },
+  overlay: {
+    background: 'rgba(71,84,93,0.8)'
   }
 }
 
@@ -19,7 +22,7 @@ const ContactModal = ({ handleModal, modalIsOpen }) => {
     <Modal isOpen={modalIsOpen} onRequestClose={handleModal} style={customStyles}>
       <div className='w-full mx-auto p-10 relative'>
         <div
-          className='absolute right-0 -top-2 hover:bg-gray-200 px-3 py-2 rounded-2xl font-bold cursor-pointer'
+          className='absolute right-0 -top-2 text-gray-600 text-xl hover:bg-gray-200 px-3 py-2 rounded-2xl font-bold cursor-pointer'
           onClick={handleModal}
         >
           X
