@@ -1,15 +1,32 @@
 import { useState } from 'react'
 
+import { auth } from 'firebaseConfig'
 import { FaCanadianMapleLeaf } from 'react-icons/fa'
 import { FiChevronDown } from 'react-icons/fi'
+import { signOut } from 'firebase/auth'
+import PropTypes from 'prop-types'
 
 import ContactModal from 'components/contactModal/ContactModal'
+import Login from 'pages/auth/Login'
+import SignUp from 'pages/auth/SignUp'
 
-const Navbar = () => {
+const Navbar = ({ activeUser, getDisplayName }) => {
   const [show, setShow] = useState(false)
+  const [error, setError] = useState('')
   const [modalIsOpen, setIsOpen] = useState(false)
+  const [loginmodalIsOpen, setLoginmodalIsOpen] = useState(false)
+  const [signUpmodalIsOpen, setSignUpmodalIsOpen] = useState(false)
 
   const handleModal = () => setIsOpen(!modalIsOpen)
+  const loginHandleModal = () => setLoginmodalIsOpen(!loginmodalIsOpen)
+  const signUpHandleModal = () => setSignUpmodalIsOpen(!signUpmodalIsOpen)
+
+  const logOut = () => {
+    signOut(auth)
+      .then(() => {})
+      .catch(error => setError(error))
+  }
+
   return (
     <>
       <div className='navbar-main px-6 py-5 flex justify-between fixed bg-white w-full '>
@@ -23,15 +40,18 @@ const Navbar = () => {
           </div>
         </div>
         <div className='navbar-right flex items-center space-x-7'>
-          {false && (
+          {activeUser ? (
             <div className='relative inline-block text-left'>
-              <div>
+              <div className='flex items-center space-x-2'>
+                <span className='text-blue-500 hover:text-blue-400 hover:cursor-pointer'>
+                  {error}
+                </span>
                 <button
                   type='button'
                   className='inline-flex justify-center w-full rounded-md shadow-sm px-4 py-2.5 text-md font-medium text-gray-700 hover:bg-gray-200 active:bg-gray-300 focus:outline-none focus:ring focus:ring-gray-300 '
                   onClick={() => setShow(!show)}
                 >
-                  Junaid
+                  {activeUser}
                   <span className='mt-1 ml-2 text-md'>
                     <FiChevronDown />
                   </span>
@@ -57,7 +77,10 @@ const Navbar = () => {
                     </a>
                     <a
                       className='text-gray-700 block px-4 py-2 text-sm cursor-pointer hover:bg-gray-200'
-                      onClick={() => setShow(!show)}
+                      onClick={() => {
+                        setShow(!show)
+                        logOut()
+                      }}
                     >
                       Sign out
                     </a>
@@ -65,18 +88,46 @@ const Navbar = () => {
                 </div>
               )}
             </div>
+          ) : (
+            <div className='flex space-x-5 font-bold text-lg'>
+              <span
+                className='text-blue-500 hover:text-blue-400 hover:cursor-pointer'
+                onClick={signUpHandleModal}
+              >
+                Sign Up
+              </span>
+              <span
+                className='text-blue-500 hover:text-blue-400 hover:cursor-pointer'
+                onClick={loginHandleModal}
+              >
+                Login
+              </span>
+            </div>
           )}
-          <div className='flex space-x-5 font-bold text-lg'>
-            <span className='text-blue-500 hover:text-blue-400 hover:cursor-pointer'>Sign Up</span>
-            <span className='text-blue-500 hover:text-blue-400 hover:cursor-pointer'>Login</span>
-          </div>
+
           <button className='bg-blue-500 px-5 py-3 borde text-white font-bold rounded-md hover:bg-blue-400'>
             Start New Game
           </button>
         </div>
       </div>
       <ContactModal handleModal={handleModal} modalIsOpen={modalIsOpen} />
+      <Login
+        handleModal={loginHandleModal}
+        modalIsOpen={loginmodalIsOpen}
+        getDisplayName={getDisplayName}
+      />
+      <SignUp
+        handleModal={signUpHandleModal}
+        modalIsOpen={signUpmodalIsOpen}
+        getDisplayName={getDisplayName}
+      />
     </>
   )
 }
+
+Navbar.propTypes = {
+  activeUser: PropTypes.string,
+  getDisplayName: PropTypes.func
+}
+
 export default Navbar
