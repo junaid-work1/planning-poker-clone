@@ -1,6 +1,8 @@
 import Modal from 'react-modal'
 import PropTypes from 'prop-types'
 
+import Input from 'components/elements/Input'
+
 const customStyles = {
   content: {
     borderRadius: '20px',
@@ -18,6 +20,21 @@ const customStyles = {
 }
 
 const ContactModal = ({ handleModal, modalIsOpen }) => {
+  const inputList = [
+    {
+      name: 'name',
+      type: 'text',
+      placeholder: 'Your name (optional)',
+      styling: 'w-full mt-1 mb-3 p-2 border-2 border-gray-300 rounded-md'
+    },
+    {
+      name: 'email',
+      type: 'email',
+      placeholder: 'Your email (optional)',
+      styling: 'w-full mt-1 mb-3 p-2 border-2 border-gray-300 rounded-md'
+    }
+  ]
+
   return (
     <Modal isOpen={modalIsOpen} onRequestClose={handleModal} style={customStyles}>
       <div className='w-full mx-auto p-10 relative'>
@@ -29,23 +46,21 @@ const ContactModal = ({ handleModal, modalIsOpen }) => {
         </div>
         <form>
           <div className='mb-10'>
-            <input
-              type='text'
-              name='name'
-              className='w-full mt-1 mb-3 p-2 border-2 border-gray-300 rounded-md'
-              placeholder='Your name (optional)'
-            />
-            <input
-              name='email'
-              type='email'
-              className='w-full mt-1 mb-3 p-2 border-2 border-gray-300 rounded-md'
-              placeholder='Your email (optional)'
-              required
-            />
+            {inputList.map(item => (
+              <Input
+                name={item.name}
+                type={item.type}
+                placeholder={item.placeholder}
+                className={item.styling}
+                key={item.name}
+                required
+              />
+            ))}
             <textarea
               name='message'
               className='w-full mt-1 mb-3 p-2 border-2 border-gray-300 rounded-md'
               placeholder='Message'
+              required
             ></textarea>
           </div>
           <button
