@@ -27,6 +27,54 @@ const Navbar = ({ activeUser, getDisplayName }) => {
       .catch(error => setError(error))
   }
 
+  const activeUserDropdown = (
+    <div className='origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'>
+      <div className='py-1'>
+        <a
+          className='text-gray-700 block px-4 py-2 text-sm cursor-pointer hover:bg-gray-200'
+          onClick={() => setShow(!show)}
+        >
+          My account
+        </a>
+        <a
+          className='text-gray-700 block px-4 py-2 text-sm cursor-pointer hover:bg-gray-200'
+          onClick={() => {
+            setShow(!show)
+            handleModal()
+          }}
+        >
+          Contact us
+        </a>
+        <a
+          className='text-gray-700 block px-4 py-2 text-sm cursor-pointer hover:bg-gray-200'
+          onClick={() => {
+            setShow(!show)
+            logOut()
+          }}
+        >
+          Sign out
+        </a>
+      </div>
+    </div>
+  )
+
+  const loginSignupBox = (
+    <div className='flex space-x-5 font-bold text-lg'>
+      <span
+        className='text-blue-500 hover:text-blue-400 hover:cursor-pointer'
+        onClick={signUpHandleModal}
+      >
+        Sign Up
+      </span>
+      <span
+        className='text-blue-500 hover:text-blue-400 hover:cursor-pointer'
+        onClick={loginHandleModal}
+      >
+        Login
+      </span>
+    </div>
+  )
+
   return (
     <>
       <div className='navbar-main px-6 py-5 flex justify-between fixed bg-white w-full '>
@@ -57,54 +105,11 @@ const Navbar = ({ activeUser, getDisplayName }) => {
                   </span>
                 </button>
               </div>
-              {show && (
-                <div className='origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'>
-                  <div className='py-1'>
-                    <a
-                      className='text-gray-700 block px-4 py-2 text-sm cursor-pointer hover:bg-gray-200'
-                      onClick={() => setShow(!show)}
-                    >
-                      My account
-                    </a>
-                    <a
-                      className='text-gray-700 block px-4 py-2 text-sm cursor-pointer hover:bg-gray-200'
-                      onClick={() => {
-                        setShow(!show)
-                        handleModal()
-                      }}
-                    >
-                      Contact us
-                    </a>
-                    <a
-                      className='text-gray-700 block px-4 py-2 text-sm cursor-pointer hover:bg-gray-200'
-                      onClick={() => {
-                        setShow(!show)
-                        logOut()
-                      }}
-                    >
-                      Sign out
-                    </a>
-                  </div>
-                </div>
-              )}
+              {show && activeUserDropdown}
             </div>
           ) : (
-            <div className='flex space-x-5 font-bold text-lg'>
-              <span
-                className='text-blue-500 hover:text-blue-400 hover:cursor-pointer'
-                onClick={signUpHandleModal}
-              >
-                Sign Up
-              </span>
-              <span
-                className='text-blue-500 hover:text-blue-400 hover:cursor-pointer'
-                onClick={loginHandleModal}
-              >
-                Login
-              </span>
-            </div>
+            loginSignupBox
           )}
-
           <button className='bg-blue-500 px-5 py-3 borde text-white font-bold rounded-md hover:bg-blue-400'>
             Start New Game
           </button>
