@@ -1,5 +1,3 @@
-import shortid from 'shortid'
-
 import Invite from 'assets/images/invite.svg'
 import StartGame from 'assets/images/startGame.svg'
 import Vote from 'assets/images/vote.svg'
@@ -31,8 +29,8 @@ const GameSteps = () => {
         <p className='text-gray-600'>3 Simple Steps to Start Your Story Estimates</p>
       </div>
       <div className='game-steps-cards flex justify-center items-center space-x-16'>
-        {steps.map(({ title, subtitle, des, image }) => (
-          <div className='w-1/4 ml-12 space-y-10' key={shortid.generate()}>
+        {steps.map(({ title, subtitle, des, image }, index) => (
+          <div className='w-1/4 ml-12 space-y-10' key={index.toString() + 1}>
             <img src={image} alt='StartGame' />
             <h1 className='text-2xl font-bold'>{title}</h1>
             <p className='text-gray-600'>

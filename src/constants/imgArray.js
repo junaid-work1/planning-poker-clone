@@ -33,3 +33,5 @@ export const brandsArray = [
   Mastercard,
   Ing
 ]
+
+export const heroPageImage = [Nokia, Deloitte, hp, Ing, Mastercard]

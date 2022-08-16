@@ -1,5 +1,3 @@
-import shortid from 'shortid'
-
 import csv from 'assets/images/csv.webp'
 import facilitators from 'assets/images/facilitators.webp'
 import Iphone from 'assets/images/iphone.webp'
@@ -61,7 +59,7 @@ const Planning = () => {
           className={`flex justify-center items-center mt-10 p-10 ${
             id % 2 === 0 ? 'flex-row-reverse' : ''
           }`}
-          key={shortid.generate()}
+          key={id}
         >
           <div className='planning-right w-2/4 flex flex-col px-10 py-16 mt-5'>
             <div className='planning-content space-y-6 mb-14'>
