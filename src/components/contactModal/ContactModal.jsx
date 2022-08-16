@@ -2,6 +2,7 @@ import Modal from 'react-modal'
 import PropTypes from 'prop-types'
 
 import Input from 'components/elements/Input'
+import Button from 'components/elements/Button'
 
 const customStyles = {
   content: {
@@ -35,6 +36,9 @@ const ContactModal = ({ handleModal, modalIsOpen }) => {
     }
   ]
 
+  const btnStyle =
+    'h-10 w-full px-5 text-white font-bold bg-blue-500 rounded-lg transition-colors duration-150 focus:shadow-outline hover:bg-blue-300'
+
   return (
     <Modal isOpen={modalIsOpen} onRequestClose={handleModal} style={customStyles}>
       <div className='w-full mx-auto p-10 relative'>
@@ -63,12 +67,7 @@ const ContactModal = ({ handleModal, modalIsOpen }) => {
               required
             ></textarea>
           </div>
-          <button
-            type='submit'
-            className='h-10 w-full px-5 text-white font-bold bg-blue-500 rounded-lg transition-colors duration-150 focus:shadow-outline hover:bg-blue-300'
-          >
-            Contact Us
-          </button>
+          <Button type={'submit'} title={'Contact Us'} className={btnStyle} />
         </form>
       </div>
     </Modal>
