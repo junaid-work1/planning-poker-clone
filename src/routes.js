@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { auth } from 'firebaseConfig'
 
+import CreateGame from 'pages/create-game/CreateGame'
+import GameTable from 'pages/game-table/GameTable'
 import Home from 'pages/home/Home'
 
 const AllRoutes = () => {
@@ -17,7 +19,9 @@ const AllRoutes = () => {
   }
 
   const route = [
-    { path: '/', element: <Home activeUser={userName} getDisplayName={getDisplayName} /> }
+    { path: '/', element: <Home activeUser={userName} getDisplayName={getDisplayName} /> },
+    { path: 'creategame', element: <CreateGame /> },
+    { path: 'gametable', element: <GameTable activeUser={userName} /> }
   ]
 
   useEffect(() => {
@@ -25,15 +29,13 @@ const AllRoutes = () => {
   }, [auth])
 
   return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          {route.map(item => (
-            <Route path={item.path} element={item.element} key={item.path} />
-          ))}
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {route.map(item => (
+          <Route path={item.path} element={item.element} key={item.path} />
+        ))}
+      </Routes>
+    </BrowserRouter>
   )
 }
 

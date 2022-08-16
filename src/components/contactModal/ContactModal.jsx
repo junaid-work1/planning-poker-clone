@@ -17,48 +17,46 @@ const customStyles = {
   }
 }
 
-const ContactModal = ({ handleModal, modalIsOpen }) => {
-  return (
-    <Modal isOpen={modalIsOpen} onRequestClose={handleModal} style={customStyles}>
-      <div className='w-full mx-auto p-10 relative'>
-        <div
-          className='absolute right-0 -top-2 text-gray-600 text-xl hover:bg-gray-200 px-3 py-2 rounded-2xl font-bold cursor-pointer'
-          onClick={handleModal}
-        >
-          X
-        </div>
-        <form>
-          <div className='mb-10'>
-            <input
-              type='text'
-              name='name'
-              className='w-full mt-1 mb-3 p-2 border-2 border-gray-300 rounded-md'
-              placeholder='Your name (optional)'
-            />
-            <input
-              name='email'
-              type='email'
-              className='w-full mt-1 mb-3 p-2 border-2 border-gray-300 rounded-md'
-              placeholder='Your email (optional)'
-              required
-            />
-            <textarea
-              name='message'
-              className='w-full mt-1 mb-3 p-2 border-2 border-gray-300 rounded-md'
-              placeholder='Message'
-            ></textarea>
-          </div>
-          <button
-            type='submit'
-            className='h-10 w-full px-5 text-white font-bold bg-blue-500 rounded-lg transition-colors duration-150 focus:shadow-outline hover:bg-blue-300'
-          >
-            Contact Us
-          </button>
-        </form>
+const ContactModal = ({ handleModal, modalIsOpen }) => (
+  <Modal isOpen={modalIsOpen} ariaHideApp={false} onRequestClose={handleModal} style={customStyles}>
+    <div className='w-full mx-auto p-10 relative'>
+      <div
+        className='absolute right-0 -top-2 text-gray-600 text-xl hover:bg-gray-200 px-3 py-2 rounded-2xl font-bold cursor-pointer'
+        onClick={handleModal}
+      >
+        X
       </div>
-    </Modal>
-  )
-}
+      <form>
+        <div className='mb-10'>
+          <input
+            type='text'
+            name='name'
+            className='w-full mt-1 mb-3 p-2 border-2 border-gray-300 rounded-md'
+            placeholder='Your name (optional)'
+          />
+          <input
+            name='email'
+            type='email'
+            className='w-full mt-1 mb-3 p-2 border-2 border-gray-300 rounded-md'
+            placeholder='Your email (optional)'
+            required
+          />
+          <textarea
+            name='message'
+            className='w-full mt-1 mb-3 p-2 border-2 border-gray-300 rounded-md'
+            placeholder='Message'
+          ></textarea>
+        </div>
+        <button
+          type='submit'
+          className='h-10 w-full px-5 text-white font-bold bg-blue-500 rounded-lg transition-colors duration-150 focus:shadow-outline hover:bg-blue-300'
+        >
+          Contact Us
+        </button>
+      </form>
+    </div>
+  </Modal>
+)
 
 ContactModal.propTypes = {
   handleModal: PropTypes.func,

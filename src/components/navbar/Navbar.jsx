@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Outlet, Link } from 'react-router-dom'
 
 import { auth } from 'firebaseConfig'
 import { FaCanadianMapleLeaf } from 'react-icons/fa'
@@ -104,10 +105,11 @@ const Navbar = ({ activeUser, getDisplayName }) => {
               </span>
             </div>
           )}
-
-          <button className='bg-blue-500 px-5 py-3 borde text-white font-bold rounded-md hover:bg-blue-400'>
-            Start New Game
-          </button>
+          <Link to='/creategame'>
+            <button className='bg-blue-500 px-5 py-3 borde text-white font-bold rounded-md hover:bg-blue-400'>
+              Start New Game
+            </button>
+          </Link>
         </div>
       </div>
       <ContactModal handleModal={handleModal} modalIsOpen={modalIsOpen} />
@@ -121,6 +123,7 @@ const Navbar = ({ activeUser, getDisplayName }) => {
         modalIsOpen={signUpmodalIsOpen}
         getDisplayName={getDisplayName}
       />
+      <Outlet />
     </>
   )
 }
