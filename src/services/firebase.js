@@ -2,6 +2,7 @@ import { auth } from 'firebaseConfig'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
   updateProfile
 } from 'firebase/auth'
 
@@ -56,4 +57,10 @@ export const signUpWithEmails = (
       setSubmitButtonDisabled(false)
       setError(error.message)
     })
+}
+
+export const logOut = setError => {
+  signOut(auth)
+    .then(() => {})
+    .catch(error => setError(error))
 }

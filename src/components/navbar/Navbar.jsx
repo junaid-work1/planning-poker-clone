@@ -1,11 +1,11 @@
 import { useState } from 'react'
+import { Outlet, Link } from 'react-router-dom'
 
-import { auth } from 'firebaseConfig'
 import { FaCanadianMapleLeaf } from 'react-icons/fa'
 import { FiChevronDown } from 'react-icons/fi'
-import { signOut } from 'firebase/auth'
 import PropTypes from 'prop-types'
 
+import { logOut } from 'services/firebase'
 import ContactModal from 'components/contactModal/ContactModal'
 import Login from 'pages/auth/Login'
 import SignUp from 'pages/auth/SignUp'
@@ -21,13 +21,9 @@ const Navbar = ({ activeUser, getDisplayName }) => {
   const loginHandleModal = () => setLoginmodalIsOpen(!loginmodalIsOpen)
   const signUpHandleModal = () => setSignUpmodalIsOpen(!signUpmodalIsOpen)
 
-  const logOut = () => {
-    signOut(auth)
-      .then(() => {})
-      .catch(error => setError(error))
-  }
+  logOut(setError)
 
-  const activeUserDropdown = (
+  const logInUserDropDown = (
     <div className='origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'>
       <div className='py-1'>
         <a
@@ -58,7 +54,7 @@ const Navbar = ({ activeUser, getDisplayName }) => {
     </div>
   )
 
-  const loginSignupBox = (
+  const signUpOptions = (
     <div className='flex space-x-5 font-bold text-lg'>
       <span
         className='text-blue-500 hover:text-blue-400 hover:cursor-pointer'
@@ -105,14 +101,16 @@ const Navbar = ({ activeUser, getDisplayName }) => {
                   </span>
                 </button>
               </div>
-              {show && activeUserDropdown}
+              {show && logInUserDropDown}
             </div>
           ) : (
-            loginSignupBox
+            signUpOptions
           )}
-          <button className='bg-blue-500 px-5 py-3 borde text-white font-bold rounded-md hover:bg-blue-400'>
-            Start New Game
-          </button>
+          <Link to='/creategame'>
+            <button className='bg-blue-500 px-5 py-3 borde text-white font-bold rounded-md hover:bg-blue-400'>
+              Start New Game
+            </button>
+          </Link>
         </div>
       </div>
       <ContactModal handleModal={handleModal} modalIsOpen={modalIsOpen} />
@@ -126,6 +124,7 @@ const Navbar = ({ activeUser, getDisplayName }) => {
         modalIsOpen={signUpmodalIsOpen}
         getDisplayName={getDisplayName}
       />
+      <Outlet />
     </>
   )
 }

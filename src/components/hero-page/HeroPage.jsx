@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { heroPageImage } from 'constants/imgArray'
 import Crew from 'assets/images/crew.svg'
 import Result from 'assets/images/results.webp'
@@ -13,9 +15,11 @@ const HeroPage = () => (
           </p>
         </div>
         <div className='flex flex-col space-y-16'>
-          <button className='w-fit bg-blue-500 px-5 py-3 borde text-white font-bold rounded-md hover:bg-blue-400'>
-            Start New Game
-          </button>
+          <Link to='/creategame'>
+            <button className='w-fit bg-blue-500 px-5 py-3 borde text-white font-bold rounded-md hover:bg-blue-400'>
+              Start New Game
+            </button>
+          </Link>
           <span className='text-gray-500'>TRUSTED BY TEAMS AT</span>
         </div>
       </div>
