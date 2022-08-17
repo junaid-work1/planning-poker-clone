@@ -25,13 +25,11 @@ const CreateGame = () => {
               className='border border-gray-300 p-2 w-full rounded-lg'
               placeholder='Game name'
             />
-
             <select className='w-full p-3 border border-gray-300 text-sm rounded-lg cursor-pointer'>
               <option value='US'>Fibonacci ( 0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ? )</option>
               <option value='CA'>Powers of 2 ( 0, 1, 2, 4, 8, 16, 32, 64, ? )</option>
             </select>
           </div>
-
           <Link to='/gametable'>
             <button className='w-full bg-blue-500 p-3 rounded-lg text-white font-bold'>
               Create game

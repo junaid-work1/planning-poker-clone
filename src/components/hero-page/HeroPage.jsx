@@ -1,11 +1,7 @@
 import { Link } from 'react-router-dom'
 
+import { heroPageImage } from 'constants/imgArray'
 import Crew from 'assets/images/crew.svg'
-import Deloitte from 'assets/images/deloitte.svg'
-import Hp from 'assets/images/hp.svg'
-import Ing from 'assets/images/ing.svg'
-import Mastercard from 'assets/images/mastercard.svg'
-import Microsoft from 'assets/images/microsoft.svg'
 import Result from 'assets/images/results.webp'
 
 const HeroPage = () => (
@@ -28,11 +24,9 @@ const HeroPage = () => (
         </div>
       </div>
       <div className='hero-page-brands flex space-x-5'>
-        <img src={Microsoft} alt='Microsoft' />
-        <img src={Hp} alt='Hp' />
-        <img src={Mastercard} alt='Mastercard' />
-        <img src={Ing} alt='Ing' />
-        <img src={Deloitte} alt='Deloitte' />
+        {heroPageImage.map((item, index) => (
+          <img src={item} alt='Microsoft' key={index.toString() + 1} />
+        ))}
       </div>
     </div>
     <div className='hero-page-left mt-20'>

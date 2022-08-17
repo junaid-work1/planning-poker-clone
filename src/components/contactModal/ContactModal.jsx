@@ -1,24 +1,18 @@
 import Modal from 'react-modal'
 import PropTypes from 'prop-types'
 
-const customStyles = {
-  content: {
-    borderRadius: '20px',
-    bottom: 'auto',
-    left: '50%',
-    marginRight: '-50%',
-    right: 'auto',
-    top: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '40%'
-  },
-  overlay: {
-    background: 'rgba(71,84,93,0.8)'
-  }
-}
+import { contactModalinputList } from 'constants/inputLists'
+import { ContactModalBtnStyle, ContactModalStyles } from 'constants/customStyle'
+import Button from 'components/elements/Button'
+import Input from 'components/elements/Input'
 
 const ContactModal = ({ handleModal, modalIsOpen }) => (
-  <Modal isOpen={modalIsOpen} ariaHideApp={false} onRequestClose={handleModal} style={customStyles}>
+  <Modal
+    isOpen={modalIsOpen}
+    ariaHideApp={false}
+    onRequestClose={handleModal}
+    style={ContactModalStyles}
+  >
     <div className='w-full mx-auto p-10 relative'>
       <div
         className='absolute right-0 -top-2 text-gray-600 text-xl hover:bg-gray-200 px-3 py-2 rounded-2xl font-bold cursor-pointer'
@@ -28,31 +22,24 @@ const ContactModal = ({ handleModal, modalIsOpen }) => (
       </div>
       <form>
         <div className='mb-10'>
-          <input
-            type='text'
-            name='name'
-            className='w-full mt-1 mb-3 p-2 border-2 border-gray-300 rounded-md'
-            placeholder='Your name (optional)'
-          />
-          <input
-            name='email'
-            type='email'
-            className='w-full mt-1 mb-3 p-2 border-2 border-gray-300 rounded-md'
-            placeholder='Your email (optional)'
-            required
-          />
+          {contactModalinputList.map(item => (
+            <Input
+              name={item.name}
+              type={item.type}
+              placeholder={item.placeholder}
+              className={item.styling}
+              key={item.name}
+              required
+            />
+          ))}
           <textarea
             name='message'
             className='w-full mt-1 mb-3 p-2 border-2 border-gray-300 rounded-md'
             placeholder='Message'
+            required
           ></textarea>
         </div>
-        <button
-          type='submit'
-          className='h-10 w-full px-5 text-white font-bold bg-blue-500 rounded-lg transition-colors duration-150 focus:shadow-outline hover:bg-blue-300'
-        >
-          Contact Us
-        </button>
+        <Button className={ContactModalBtnStyle} type={'submit'} title={'Contact Us'} />
       </form>
     </div>
   </Modal>

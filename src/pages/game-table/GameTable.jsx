@@ -63,6 +63,44 @@ const GameTable = ({ activeUser }) => {
     setValue(null)
   }
 
+  const loginUserDropDown = (
+    <div className='origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'>
+      <div className='py-1'>
+        <a
+          className='text-gray-700 block px-4 py-2 text-sm cursor-pointer hover:bg-gray-200'
+          onClick={() => setShow(!show)}
+        >
+          My account
+        </a>
+        <a
+          className='text-gray-700 block px-4 py-2 text-sm cursor-pointer hover:bg-gray-200'
+          onClick={() => {
+            setShow(!show)
+          }}
+        >
+          Contact us
+        </a>
+        <a
+          className='text-gray-700 block px-4 py-2 text-sm cursor-pointer hover:bg-gray-200'
+          onClick={() => {
+            setShow(!show)
+            logOut()
+          }}
+        >
+          Sign out
+        </a>
+      </div>
+    </div>
+  )
+  const revealButton = (
+    <button
+      className='w-fit px-4 py-2 rounded-lg font-bold bg-blue-500 text-white hover:bg-blue-400'
+      hidden={revealCard}
+      onClick={handleRevealCard}
+    >
+      Reveal Card
+    </button>
+  )
   return (
     <>
       <div>
@@ -91,35 +129,7 @@ const GameTable = ({ activeUser }) => {
                   </button>
                 </div>
 
-                {show && (
-                  <div className='origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'>
-                    <div className='py-1'>
-                      <a
-                        className='text-gray-700 block px-4 py-2 text-sm cursor-pointer hover:bg-gray-200'
-                        onClick={() => setShow(!show)}
-                      >
-                        My account
-                      </a>
-                      <a
-                        className='text-gray-700 block px-4 py-2 text-sm cursor-pointer hover:bg-gray-200'
-                        onClick={() => {
-                          setShow(!show)
-                        }}
-                      >
-                        Contact us
-                      </a>
-                      <a
-                        className='text-gray-700 block px-4 py-2 text-sm cursor-pointer hover:bg-gray-200'
-                        onClick={() => {
-                          setShow(!show)
-                          logOut()
-                        }}
-                      >
-                        Sign out
-                      </a>
-                    </div>
-                  </div>
-                )}
+                {show && loginUserDropDown}
               </div>
             ) : (
               <Link to='/'>
@@ -149,13 +159,7 @@ const GameTable = ({ activeUser }) => {
           {!selectCard ? (
             <span className='text-gray-500 text-lg'>pick your cards!</span>
           ) : (
-            <button
-              className='w-fit px-4 py-2 rounded-lg font-bold bg-blue-500 text-white hover:bg-blue-400'
-              hidden={revealCard}
-              onClick={handleRevealCard}
-            >
-              Reveal Card
-            </button>
+            revealButton
           )}
           {revealCard && (
             <button
@@ -171,7 +175,7 @@ const GameTable = ({ activeUser }) => {
             <div>
               <div
                 className={`w-10 h-20 ${
-                  selectCard ? 'bg-blue-500' : ' bg-gray-300'
+                  selectCard ? 'bg-blue-500' : 'bg-gray-300'
                 }  rounded-lg mb-2`}
               ></div>
               {activeUser ? (
@@ -202,7 +206,7 @@ const GameTable = ({ activeUser }) => {
                       className={`w-10 h-20 ${
                         value !== null
                           ? selectedItem?.value === item?.value
-                            ? 'bg-blue-500 text-white -mt-1'
+                            ? 'bg-blue-500 text-white -mt-2'
                             : 'text-white bg-gray-400 cursor-not-allowed border-none'
                           : 'text-blue-500'
                       } border-2 border-blue-500 rounded-lg mt-4 font-bold text-lg flex items-center justify-center cursor-pointer`}

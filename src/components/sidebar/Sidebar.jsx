@@ -6,19 +6,22 @@ const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(false)
   const [showIssueBox, setShowIssueBox] = useState(false)
 
+  const issueStateHandler = () => setShowIssueBox(!showIssueBox)
+  const showStateHandler = () => setShowSidebar(!showSidebar)
+
   return (
     <>
       {showSidebar ? (
         <button
           className='text-3xl text-gray-400 items-center cursor-pointer fixed right-10 top-6 z-50'
-          onClick={() => setShowSidebar(!showSidebar)}
+          onClick={showStateHandler}
         >
           x
         </button>
       ) : (
         <span
           className='cursor-pointer text-blue-500 border-2 border-blue-500 p-2 rounded-lg text-3xl'
-          onClick={() => setShowSidebar(!showSidebar)}
+          onClick={showStateHandler}
         >
           <BiNotepad />
         </span>
@@ -38,7 +41,7 @@ const Sidebar = () => {
         {!showIssueBox ? (
           <div
             className='flex space-x-2 text-gray-500 p-2 rounded-md cursor-pointer mb-4 hover:bg-gray-100 text-lg'
-            onClick={() => setShowIssueBox(!showIssueBox)}
+            onClick={issueStateHandler}
           >
             <span>+</span>
             <p>Add an issue</p>
@@ -53,13 +56,13 @@ const Sidebar = () => {
             <div className='space-x-2'>
               <button
                 className='px-8 py-2 text-blue-500 border-2 border-gray-200 rounded-lg font-bold hover:bg-blue-200'
-                onClick={() => setShowIssueBox(!showIssueBox)}
+                onClick={issueStateHandler}
               >
                 Cancel
               </button>
               <button
                 className='bg-blue-500 px-10 py-2.5 rounded-lg font-bold hover:bg-blue-400'
-                onClick={() => setShowIssueBox(!showIssueBox)}
+                onClick={issueStateHandler}
               >
                 Save
               </button>
