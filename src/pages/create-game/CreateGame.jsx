@@ -1,8 +1,44 @@
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { FaCanadianMapleLeaf } from 'react-icons/fa'
+import PropTypes from 'prop-types'
+import ReactLoading from 'react-loading'
 
-const CreateGame = () => {
+import { addNewGame } from 'services/gameFunctions'
+import Button from 'components/elements/Button'
+import Input from 'components/elements/Input'
+
+const CreateGame = ({ activeUser }) => {
+  const navigate = useNavigate()
+
+  const [gameName, setGameName] = useState('')
+  const [isloading, setIsloading] = useState(false)
+  const [error, setError] = useState(null)
+  const [gameVoteSystem, setGameVoteSystem] = useState('Fibonacci')
+  const [createdBy, setCreatedBy] = useState(activeUser || 'Guest')
+
+  const handleChange = e => {
+    setGameName(e.target.value)
+    setError(null)
+  }
+
+  const handleSubmission = async () => {
+    setCreatedBy(activeUser || 'Guest')
+
+    if (gameName) {
+      setIsloading(true)
+      const game = {
+        name: gameName,
+        createdBy: createdBy,
+        gameType: gameVoteSystem
+      }
+      const gameId = await addNewGame(game)
+      setIsloading(false)
+      navigate(`/gametable/${gameId}`)
+    } else setError('input field should not be empty!')
+  }
+
   return (
     <>
       <div className='flex items-center space-x-3 p-10'>
@@ -11,34 +47,51 @@ const CreateGame = () => {
             <FaCanadianMapleLeaf />
           </Link>
         </span>
-        <div>
-          <p className='font-bold text-xl'>Create Game</p>
-        </div>
+        <p className='font-bold md:text-xl '>Create Game</p>
       </div>
       <div className='space-y-10 mt-28 flex flex-col justify-center items-center'>
         <p>Choose a name and a voting system for your game.</p>
-        <div className='w-2/5 space-y-16 flex flex-col justify-center'>
+        <div className='w-2/5 space-y-10 flex flex-col justify-center'>
           <div className='space-y-8'>
-            <input
+            <Input
               type='text'
-              name='game'
+              name='name'
+              value={gameName}
               className='border border-gray-300 p-2 w-full rounded-lg'
               placeholder='Game name'
+              onChange={handleChange}
             />
-            <select className='w-full p-3 border border-gray-300 text-sm rounded-lg cursor-pointer'>
-              <option value='US'>Fibonacci ( 0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ? )</option>
-              <option value='CA'>Powers of 2 ( 0, 1, 2, 4, 8, 16, 32, 64, ? )</option>
+            <select
+              className='w-full p-3 border border-gray-300 bg-gray-300 text-sm rounded-lg cursor-pointer'
+              value={gameVoteSystem}
+              onChange={e => setGameVoteSystem(e.target.value)}
+              disabled
+            >
+              <option value='Fibonacci'>
+                Fibonacci ( 0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ? )
+              </option>
             </select>
           </div>
-          <Link to='/gametable'>
-            <button className='w-full bg-blue-500 p-3 rounded-lg text-white font-bold'>
-              Create game
+          <span className='text-red-500'>{error}</span>
+          {!isloading ? (
+            <Button
+              className='w-full bg-blue-500 p-3 rounded-lg text-white font-bold'
+              title='Create game'
+              onClick={handleSubmission}
+            />
+          ) : (
+            <button className='w-full bg-gray-200 p-3 rounded-lg flex justify-center'>
+              <ReactLoading type={'spin'} color={'gray'} height={30} width={30} />
             </button>
-          </Link>
+          )}
         </div>
       </div>
     </>
   )
+}
+
+CreateGame.propTypes = {
+  activeUser: PropTypes.string
 }
 
 export default CreateGame

@@ -10,6 +10,8 @@ import Button from 'components/elements/Button'
 import Input from 'components/elements/Input'
 
 const SignUp = ({ handleModal, modalIsOpen, getDisplayName }) => {
+  const navigate = useNavigate()
+
   const [userData, setUserData] = useState({
     name: '',
     email: '',
@@ -18,8 +20,6 @@ const SignUp = ({ handleModal, modalIsOpen, getDisplayName }) => {
   })
   const [error, setError] = useState('')
   const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false)
-
-  const navigate = useNavigate()
 
   const inputList = [
     {
@@ -60,7 +60,7 @@ const SignUp = ({ handleModal, modalIsOpen, getDisplayName }) => {
     const { name, value } = event.target
     setUserData({
       ...userData,
-      [name]: value.trim()
+      [name]: value
     })
   }
 

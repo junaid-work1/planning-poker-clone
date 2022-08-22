@@ -1,17 +1,18 @@
-import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
+import { initializeApp } from 'firebase/app'
+import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAgsIZtIivrKnR4J3eLgaQ0HpRH3b8TWNY',
-  authDomain: 'planning-poker-game-6a787.firebaseapp.com',
-  projectId: 'planning-poker-game-6a787',
-  storageBucket: 'planning-poker-game-6a787.appspot.com',
-  messagingSenderId: '1002557091033',
-  appId: '1:1002557091033:web:ef626eeed94abc0b7aa2c8',
-  measurementId: 'G-K83NNWWP26'
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID
 }
 
 const app = initializeApp(firebaseConfig)
 const auth = getAuth()
-
+export const db = getFirestore(app)
 export { app, auth }

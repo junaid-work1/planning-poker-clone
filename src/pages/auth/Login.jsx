@@ -11,6 +11,8 @@ import Input from 'components/elements/Input'
 import SignUp from './SignUp'
 
 const Login = ({ handleModal, modalIsOpen, getDisplayName }) => {
+  const navigate = useNavigate()
+
   const [userData, setUserData] = useState({
     email: '',
     password: ''
@@ -18,8 +20,6 @@ const Login = ({ handleModal, modalIsOpen, getDisplayName }) => {
   const [error, setError] = useState('')
   const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false)
   const [signUpmodalIsOpen, setSignUpmodalIsOpen] = useState(false)
-
-  const navigate = useNavigate()
 
   const inputList = [
     {
@@ -48,7 +48,7 @@ const Login = ({ handleModal, modalIsOpen, getDisplayName }) => {
     const { name, value } = event.target
     setUserData({
       ...userData,
-      [name]: value.trim()
+      [name]: value
     })
   }
 

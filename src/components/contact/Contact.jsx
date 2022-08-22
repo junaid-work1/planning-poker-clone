@@ -22,7 +22,7 @@ const Contact = () => {
                 Alternatively, you can visit our FAQ to see if our support team already has the
                 answers you’re looking for.
               </p>
-              <Button onClick={handleModal} className={contactBtnStyle} title={'Contact Us'} />
+              <Button onClick={handleModal} className={contactBtnStyle} title='Contact Us' />
             </div>
           </div>
         </div>

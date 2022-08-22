@@ -30,7 +30,7 @@ const Planning = () => (
         </div>
       </div>
     ))}
-    <div className='flex flex-row-reverse justify-center items-center mt-10 p-10 '>
+    <div className='flex flex-row-reverse justify-center items-center mt-10 p-10'>
       <div className='planning-right w-2/4 flex flex-col px-10 py-16 mt-5'>
         <div className='planning-content space-y-6 mb-14'>
           <div className=' space-y-6'>

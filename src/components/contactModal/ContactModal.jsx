@@ -39,7 +39,7 @@ const ContactModal = ({ handleModal, modalIsOpen }) => (
             required
           ></textarea>
         </div>
-        <Button className={ContactModalBtnStyle} type={'submit'} title={'Contact Us'} />
+        <Button className={ContactModalBtnStyle} type='submit' title='Contact Us' />
       </form>
     </div>
   </Modal>

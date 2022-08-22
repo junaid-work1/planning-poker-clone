@@ -6,6 +6,7 @@ import { auth } from 'firebaseConfig'
 import CreateGame from 'pages/create-game/CreateGame'
 import GameTable from 'pages/game-table/GameTable'
 import Home from 'pages/home/Home'
+import JoinGameSession from 'pages/join-game/JoinGameSession'
 
 const AllRoutes = () => {
   const [userName, setUserName] = useState('')
@@ -19,9 +20,10 @@ const AllRoutes = () => {
   }
 
   const route = [
-    { path: '/', element: <Home activeUser={userName} getDisplayName={getDisplayName} /> },
-    { path: 'creategame', element: <CreateGame /> },
-    { path: 'gametable', element: <GameTable activeUser={userName} /> }
+    { path: '/*', element: <Home activeUser={userName} getDisplayName={getDisplayName} /> },
+    { path: 'creategame', element: <CreateGame activeUser={userName} /> },
+    { path: '/joingamesession/:id', element: <JoinGameSession activeUser={userName} /> },
+    { path: 'gametable/:id', element: <GameTable activeUser={userName} /> }
   ]
 
   useEffect(() => {

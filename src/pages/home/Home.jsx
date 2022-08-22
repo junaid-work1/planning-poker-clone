@@ -8,19 +8,17 @@ import HeroPage from 'components/hero-page/HeroPage'
 import Navbar from 'components/navbar/Navbar'
 import Planning from 'components/planning/Planning'
 
-const Home = ({ activeUser, getDisplayName }) => {
-  return (
-    <>
-      <Navbar activeUser={activeUser} getDisplayName={getDisplayName} />
-      <HeroPage />
-      <Planning />
-      <GameSteps />
-      <Brands />
-      <Contact />
-      <Footer />
-    </>
-  )
-}
+const Home = ({ activeUser, getDisplayName }) => (
+  <>
+    <Navbar activeUser={activeUser} getDisplayName={getDisplayName} />
+    <HeroPage />
+    <Planning />
+    <GameSteps />
+    <Brands />
+    <Contact />
+    <Footer />
+  </>
+)
 
 Home.propTypes = {
   activeUser: PropTypes.string,
