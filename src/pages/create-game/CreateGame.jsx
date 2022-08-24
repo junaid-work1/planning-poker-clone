@@ -4,7 +4,7 @@ import { FaCanadianMapleLeaf } from 'react-icons/fa'
 import PropTypes from 'prop-types'
 import ReactLoading from 'react-loading'
 
-import { addNewGame } from 'services/gameFunctions'
+import { addNewGame } from 'helperFunction/gameFunctions'
 import Button from 'components/elements/Button'
 import Input from 'components/elements/Input'
 

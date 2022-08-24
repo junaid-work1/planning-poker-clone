@@ -8,7 +8,7 @@ import {
   getGameFromStore,
   getPlayersFromStore,
   updateGameDataInStore
-} from './firebase'
+} from '../services/firebase'
 import { resetPlayers, updatePlayerOfGames } from './playerFunctions'
 import { status } from 'constants/inputLists'
 
@@ -54,7 +54,6 @@ export const endOfGame = async gameId => {
 export const getAverage = players => {
   let values = 0
   let numOfPlayers = 0
-
   players.forEach(player => {
     if (player.value && player.value >= 0) {
       values = values + player.value

@@ -14,7 +14,8 @@ const GameTableHeader = ({
   show,
   setShow,
   currentPlayerId,
-  players
+  players,
+  game
 }) => {
   const currentUser = () => {
     const [result] = players.filter(item => item.id === currentPlayerId)
@@ -34,23 +35,16 @@ const GameTableHeader = ({
     {
       style: 'text-gray-700 block px-4 py-2 text-sm cursor-pointer hover:bg-gray-200',
       functionCall: function () {
-        setShow(!show)
+        return true
       },
-      title: '  My account'
-    },
-    {
-      style: 'text-gray-700 block px-4 py-2 text-sm cursor-pointer hover:bg-gray-200',
-      functionCall: function () {
-        setShow(!show)
-      },
-      title: ' Contact us'
+      title: game?.name
     },
     {
       style: 'text-gray-700 block px-4 py-2 text-sm cursor-pointer hover:bg-gray-200',
       functionCall: function () {
         HandleSignOut()
       },
-      title: '  Sign out'
+      title: 'Sign out'
     }
   ]
 
@@ -97,7 +91,7 @@ const GameTableHeader = ({
             <FaCanadianMapleLeaf />
           </Link>
         </span>
-        <p className='font-bold text-xl'>Game name</p>
+        <p className='font-bold text-xl'>{game?.name}</p>
       </div>
       <div className='flex items-center'>
         {activeUser ? gameHeaderRightSide : currentUserLink}
@@ -124,7 +118,8 @@ GameTableHeader.propTypes = {
   show: PropTypes.bool,
   setShow: PropTypes.func,
   currentPlayerId: PropTypes.string,
-  players: PropTypes.array
+  players: PropTypes.array,
+  game: PropTypes.object
 }
 
 export default GameTableHeader

@@ -5,8 +5,8 @@ import { toast } from 'react-toastify'
 import PropTypes from 'prop-types'
 import ReactLoading from 'react-loading'
 
-import { addPlayerToGame, isCurrentPlayerInGame } from 'services/playerFunctions'
-import { getGame } from 'services/gameFunctions'
+import { addPlayerToGame, isCurrentPlayerInGame } from 'helperFunction/playerFunctions'
+import { getGame } from 'helperFunction/gameFunctions'
 import Button from 'components/elements/Button'
 import Input from 'components/elements/Input'
 

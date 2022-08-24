@@ -9,7 +9,7 @@ import {
   getPlayersFromStore,
   updatePlayerInGameInStore,
   updatePlayerInStore
-} from './firebase'
+} from '../services/firebase'
 import { updateGameStatus } from './gameFunctions'
 import {
   getPlayerGamesFromCache,

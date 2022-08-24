@@ -5,8 +5,8 @@ import { toast } from 'react-toastify'
 import PropTypes from 'prop-types'
 
 import { Fibonacci } from 'constants/inputLists'
-import { endOfGame, resetGame } from 'services/gameFunctions'
-import { getCurrentPlayerId, updatePlayerValue } from 'services/playerFunctions'
+import { endOfGame, resetGame } from 'helperFunction/gameFunctions'
+import { getCurrentPlayerId, updatePlayerValue } from 'helperFunction/playerFunctions'
 import { getAllPlayersFromStore, getCompleteGameData } from 'services/firebase'
 import Button from 'components/elements/Button'
 import GameTableHeader from 'components/game/GameTableHeader'
@@ -44,7 +44,7 @@ const GameTable = ({ activeUser }) => {
     updatePlayerValue(gameId, playerId, card.value)
   }
 
-  const fetchData = async () => {
+  const fetchData = () => {
     onSnapshot(getCompleteGameData(id), querySnapshot => {
       querySnapshot.forEach(doc => {
         setGame(doc.data())
@@ -144,6 +144,7 @@ const GameTable = ({ activeUser }) => {
         show={show}
         setShow={setShow}
         players={players}
+        game={game}
         currentPlayerId={currentPlayerId}
       />
       <div className='game-table-main flex flex-col items-center justify-center space-y-6 mt-36'>

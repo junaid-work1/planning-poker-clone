@@ -26,7 +26,7 @@ const Sidebar = () => {
     await deleteIssueToStore(issueId, id)
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (issueTitle) {
       addIssueToStore(id, issueTitle)
     }
