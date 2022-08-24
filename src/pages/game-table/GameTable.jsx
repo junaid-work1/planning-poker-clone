@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-
 import { onSnapshot } from 'firebase/firestore'
 import { toast } from 'react-toastify'
 import PropTypes from 'prop-types'
@@ -45,31 +44,97 @@ const GameTable = ({ activeUser }) => {
     updatePlayerValue(gameId, playerId, card.value)
   }
 
-  useEffect(() => {
-    async function fetchData() {
-      onSnapshot(getCompleteGameData(id), querySnapshot => {
-        querySnapshot.forEach(doc => {
-          setGame(doc.data())
-        })
+  const fetchData = async () => {
+    onSnapshot(getCompleteGameData(id), querySnapshot => {
+      querySnapshot.forEach(doc => {
+        setGame(doc.data())
       })
+    })
 
-      onSnapshot(getAllPlayersFromStore(id), querySnapshot => {
-        const activePlayers = []
-        querySnapshot.forEach(doc => {
-          activePlayers.push(doc.data())
-        })
-        setPlayers(activePlayers)
+    onSnapshot(getAllPlayersFromStore(id), querySnapshot => {
+      const activePlayers = []
+      querySnapshot.forEach(doc => {
+        activePlayers.push(doc.data())
       })
+      setPlayers(activePlayers)
+    })
 
-      const currentPlayerId = getCurrentPlayerId(id)
-      if (!currentPlayerId) {
-        navigate(`/joingamesession/${id}`)
-      }
-      setCurrentPlayerId(currentPlayerId)
+    const currentPlayerId = getCurrentPlayerId(id)
+    if (!currentPlayerId) {
+      navigate(`/joingamesession/${id}`)
     }
+    setCurrentPlayerId(currentPlayerId)
+  }
 
+  useEffect(() => {
     fetchData(id)
   }, [id, navigate])
+
+  const hiddenValueCard = (
+    <div className='flex space-x-10'>
+      {players?.map(item => (
+        <div key={item.id}>
+          <div
+            className={`w-10 h-20 ${
+              item?.status === 'Finished' ? 'bg-blue-500' : 'bg-gray-300'
+            }  rounded-lg mb-2`}
+          ></div>
+          <span className='font-bold mt-2'>{item?.name} </span>
+        </div>
+      ))}
+    </div>
+  )
+  const visibleValueCard = (
+    <div className='flex space-x-5'>
+      {players?.map(item => (
+        <div key={item.id}>
+          <div className='w-10 h-20 flex justify-center items-center font-bold text-lg border-2 border-blue-500 rounded-lg mb-2'>
+            {item.value}
+          </div>
+          <span className='font-bold mt-2'>{item.name}</span>
+        </div>
+      ))}
+    </div>
+  )
+
+  const chooseCardDiv = (
+    <div className='choose-card-box space-y-2 sm:overflow-x-auto'>
+      <p className='text-center'> Choose your card 👇</p>
+      <div className='flex space-x-5'>
+        {Fibonacci?.map(card => (
+          <div key={card.value}>
+            <button
+              className={`w-10 h-20 border-2 text-blue-500 border-blue-500 rounded-lg mt-4 font-bold text-lg flex items-center justify-center cursor-pointer hover:bg-blue-500 hover:text-white`}
+              onClick={() => playPlayer(game.id, currentPlayerId, card)}
+            >
+              {card.label}
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+
+  const averageValueDiv = (
+    <div className='result-box flex justify-center items-center space-x-16'>
+      <span className='text-gray-400 text-2xl'>Average: {game?.average}</span>
+    </div>
+  )
+  const revealCardBtn = (
+    <Button
+      className='w-fit px-4 py-2 rounded-lg font-bold bg-blue-500 text-white hover:bg-blue-400'
+      onClick={handleFinishGame}
+      title='Reveal Card'
+    />
+  )
+
+  const startVotingBtn = (
+    <Button
+      className='w-fit px-4 py-2 rounded-lg font-bold bg-gray-500 text-white hover:bg-gray-900'
+      onClick={handleRestGame}
+      title='Start new voting'
+    />
+  )
 
   return (
     <>
@@ -98,70 +163,14 @@ const GameTable = ({ activeUser }) => {
             <p className='font-bold text-gray-400 underline text-lg'>Pick a card!</p>
           )}
           <div className='flex space-x-6'>
-            {game?.gameStatus === 'In Progress' && (
-              <Button
-                className='w-fit px-4 py-2 rounded-lg font-bold bg-blue-500 text-white hover:bg-blue-400'
-                onClick={handleFinishGame}
-                title='Reveal Card'
-              />
-            )}
-            {game?.gameStatus === 'Finished' && (
-              <Button
-                className='w-fit px-4 py-2 rounded-lg font-bold bg-gray-500 text-white hover:bg-gray-900'
-                onClick={handleRestGame}
-                title='Start new voting'
-              />
-            )}
+            {game?.gameStatus === 'In Progress' && revealCardBtn}
+            {game?.gameStatus === 'Finished' && startVotingBtn}
           </div>
         </div>
         <div className='flex space-x-10'>
-          {game?.average <= 0 ? (
-            <div className='flex space-x-10'>
-              {players?.map(item => (
-                <div key={item.id}>
-                  <div
-                    className={`w-10 h-20 ${
-                      item?.status === 'Finished' ? 'bg-blue-500' : 'bg-gray-300'
-                    }  rounded-lg mb-2`}
-                  ></div>
-                  <span className='font-bold mt-2'>{item?.name} </span>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className='flex space-x-5'>
-              {players?.map(item => (
-                <div key={item.id}>
-                  <div className='w-10 h-20 flex justify-center items-center font-bold text-lg border-2 border-blue-500 rounded-lg mb-2'>
-                    {item.value}
-                  </div>
-                  <span className='font-bold mt-2'>{item.name}</span>
-                </div>
-              ))}
-            </div>
-          )}
+          {game?.average <= 0 ? hiddenValueCard : visibleValueCard}
         </div>
-        {game?.average <= 0 ? (
-          <div className='choose-card-box space-y-2'>
-            <p className='text-center'> Choose your card 👇</p>
-            <div className='flex space-x-5'>
-              {Fibonacci?.map(card => (
-                <div key={card.value}>
-                  <button
-                    className={`w-10 h-20 border-2 text-blue-500 border-blue-500 rounded-lg mt-4 font-bold text-lg flex items-center justify-center cursor-pointer hover:bg-blue-500 hover:text-white`}
-                    onClick={() => playPlayer(game.id, currentPlayerId, card)}
-                  >
-                    {card.label}
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div className='result-box flex justify-center items-center space-x-16'>
-            <span className='text-gray-400 text-2xl'>Average: {game?.average}</span>
-          </div>
-        )}
+        {game?.average <= 0 ? chooseCardDiv : averageValueDiv}
       </div>
     </>
   )

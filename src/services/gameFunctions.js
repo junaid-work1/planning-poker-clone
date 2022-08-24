@@ -70,9 +70,7 @@ export const updateGame = async (gameId, updatedGame) => {
   return true
 }
 
-export const getGame = id => {
-  return getGameFromStore(id)
-}
+export const getGame = id => getGameFromStore(id)
 
 export const resetGame = async gameId => {
   const game = await getGameFromStore(gameId)

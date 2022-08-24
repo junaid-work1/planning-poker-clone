@@ -1,8 +1,9 @@
 import { useState } from 'react'
 
-import { contactBtnStyle } from 'constants/customStyle'
 import Button from 'components/elements/Button'
 import ContactModal from 'components/contactModal/ContactModal'
+
+import { contactBtnStyle } from 'constants/customStyle'
 import ContactUs from 'assets/images/Contact-us.svg'
 
 const Contact = () => {

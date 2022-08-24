@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-
 import { FaCanadianMapleLeaf } from 'react-icons/fa'
 import PropTypes from 'prop-types'
 import ReactLoading from 'react-loading'
@@ -39,6 +38,20 @@ const CreateGame = ({ activeUser }) => {
     } else setError('input field should not be empty!')
   }
 
+  const createGameBtn = (
+    <Button
+      className='w-full bg-blue-500 p-3 rounded-lg text-white font-bold'
+      title='Create game'
+      onClick={handleSubmission}
+    />
+  )
+
+  const loadingSignBtn = (
+    <button className='w-full bg-gray-200 p-3 rounded-lg flex justify-center'>
+      <ReactLoading type={'spin'} color={'gray'} height={30} width={30} />
+    </button>
+  )
+
   return (
     <>
       <div className='flex items-center space-x-3 p-10'>
@@ -50,14 +63,16 @@ const CreateGame = ({ activeUser }) => {
         <p className='font-bold md:text-xl '>Create Game</p>
       </div>
       <div className='space-y-10 mt-28 flex flex-col justify-center items-center'>
-        <p>Choose a name and a voting system for your game.</p>
+        <p className='md:text-lg sm:text-sm text-xs'>
+          Choose a name and a voting system for your game.
+        </p>
         <div className='w-2/5 space-y-10 flex flex-col justify-center'>
           <div className='space-y-8'>
             <Input
               type='text'
               name='name'
               value={gameName}
-              className='border border-gray-300 p-2 w-full rounded-lg'
+              className='min-w-full sm:min-w-full border border-gray-300 p-2 rounded-lg'
               placeholder='Game name'
               onChange={handleChange}
             />
@@ -73,17 +88,7 @@ const CreateGame = ({ activeUser }) => {
             </select>
           </div>
           <span className='text-red-500'>{error}</span>
-          {!isloading ? (
-            <Button
-              className='w-full bg-blue-500 p-3 rounded-lg text-white font-bold'
-              title='Create game'
-              onClick={handleSubmission}
-            />
-          ) : (
-            <button className='w-full bg-gray-200 p-3 rounded-lg flex justify-center'>
-              <ReactLoading type={'spin'} color={'gray'} height={30} width={30} />
-            </button>
-          )}
+          {!isloading ? createGameBtn : loadingSignBtn}
         </div>
       </div>
     </>

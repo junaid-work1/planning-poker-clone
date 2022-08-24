@@ -1,4 +1,4 @@
-export const customStyles = {
+export const authModalStyles = {
   content: {
     borderRadius: '20px',
     bottom: 'auto',

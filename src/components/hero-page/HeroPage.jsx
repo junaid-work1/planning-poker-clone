@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
 
+import Button from 'components/elements/Button'
+
 import { heroPageImage } from 'constants/imgArray'
 import Crew from 'assets/images/crew.svg'
 import Result from 'assets/images/results.webp'
-import Button from 'components/elements/Button'
 
 const HeroPage = () => (
   <div className='hero-page-main flex justify-evenly p-5 mb-20'>

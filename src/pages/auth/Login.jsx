@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
 import Modal from 'react-modal'
 import PropTypes from 'prop-types'
 
-import { customStyles } from 'constants/customStyle'
 import { signInWithEmail } from 'services/firebase'
 import Button from 'components/elements/Button'
 import Input from 'components/elements/Input'
 import SignUp from './SignUp'
+
+import { authModalStyles } from 'constants/customStyle'
 
 const Login = ({ handleModal, modalIsOpen, getDisplayName }) => {
   const navigate = useNavigate()
@@ -88,7 +88,7 @@ const Login = ({ handleModal, modalIsOpen, getDisplayName }) => {
         isOpen={modalIsOpen}
         ariaHideApp={false}
         onRequestClose={handleModal}
-        style={customStyles}
+        style={authModalStyles}
       >
         <div className='mx-auto p-10 relative'>
           <span className='font-bold text-lg'>Sign in</span>

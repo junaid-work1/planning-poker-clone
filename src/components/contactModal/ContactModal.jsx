@@ -2,9 +2,10 @@ import Modal from 'react-modal'
 import PropTypes from 'prop-types'
 
 import { contactModalinputList } from 'constants/inputLists'
-import { ContactModalBtnStyle, ContactModalStyles } from 'constants/customStyle'
 import Button from 'components/elements/Button'
 import Input from 'components/elements/Input'
+
+import { ContactModalBtnStyle, ContactModalStyles } from 'constants/customStyle'
 
 const ContactModal = ({ handleModal, modalIsOpen }) => (
   <Modal
@@ -37,7 +38,7 @@ const ContactModal = ({ handleModal, modalIsOpen }) => (
             className='w-full mt-1 mb-3 p-2 border-2 border-gray-300 rounded-md'
             placeholder='Message'
             required
-          ></textarea>
+          />
         </div>
         <Button className={ContactModalBtnStyle} type='submit' title='Contact Us' />
       </form>

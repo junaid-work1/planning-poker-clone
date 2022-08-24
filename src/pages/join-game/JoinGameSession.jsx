@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-
 import { FaCanadianMapleLeaf } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import PropTypes from 'prop-types'
@@ -62,18 +61,33 @@ const JoinGameSession = () => {
     } else setError('input field should not be empty!')
   }
 
-  useEffect(() => {
-    async function fetchData() {
-      if (newSessionData.joinGameId) {
-        if (await getGame(newSessionData.joinGameId)) {
-          if (isCurrentPlayerInGame(newSessionData.joinGameId)) {
-            Navigate(`/gametable/${newSessionData.joinGameId}`)
-          }
-        }
-      }
+  const fetchData = async () => {
+    if (
+      newSessionData.joinGameId &&
+      (await getGame(newSessionData.joinGameId)) &&
+      isCurrentPlayerInGame(newSessionData.joinGameId)
+    ) {
+      Navigate(`/gametable/${newSessionData.joinGameId}`)
     }
+  }
+
+  useEffect(() => {
     fetchData()
   }, [newSessionData.joinGameId, Navigate])
+
+  const joinNowBtn = (
+    <Button
+      className='w-full bg-blue-500 p-3 rounded-lg text-white font-bold'
+      title='Join Now'
+      onClick={handleSubmit}
+    />
+  )
+
+  const loadingBtn = (
+    <button className='w-full bg-gray-200 p-3 rounded-lg flex justify-center'>
+      <ReactLoading type={'spin'} color={'gray'} height={30} width={30} />
+    </button>
+  )
 
   return (
     <>
@@ -102,17 +116,7 @@ const JoinGameSession = () => {
             ))}
           </div>
           <span className='text-red-500'>{error}</span>
-          {!isloading ? (
-            <Button
-              className='w-full bg-blue-500 p-3 rounded-lg text-white font-bold'
-              title='Join Now'
-              onClick={handleSubmit}
-            />
-          ) : (
-            <button className='w-full bg-gray-200 p-3 rounded-lg flex justify-center'>
-              <ReactLoading type={'spin'} color={'gray'} height={30} width={30} />
-            </button>
-          )}
+          {!isloading ? joinNowBtn : loadingBtn}
         </div>
       </div>
     </>

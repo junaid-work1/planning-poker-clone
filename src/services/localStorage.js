@@ -10,9 +10,8 @@ export const getPlayerGamesFromCache = () => {
   return playerGames
 }
 
-export const updatePlayerGamesInCache = playerGames => {
+export const updatePlayerGamesInCache = playerGames =>
   localStorage.setItem(activePlayerStore, JSON.stringify(playerGames))
-}
 
 export const isGameInPlayerCache = gameId => {
   const playerGames = getPlayerGamesFromCache()

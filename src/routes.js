@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
 import { auth } from 'firebaseConfig'
 
 import CreateGame from 'pages/create-game/CreateGame'

@@ -156,14 +156,11 @@ export const updateGameDataInStore = async (gameId, data) => {
   return true
 }
 
-export const getCompleteGameData = id => {
-  return query(collection(db, Game_Collection), where('id', '==', id))
-}
+export const getCompleteGameData = id =>
+  query(collection(db, Game_Collection), where('id', '==', id))
 
-export const getAllPlayersFromStore = id => {
-  return query(collection(db, Player_Collection), where('gameId', '==', id))
-}
+export const getAllPlayersFromStore = id =>
+  query(collection(db, Player_Collection), where('gameId', '==', id))
 
-export const getIssueFromStore = id => {
-  return query(collection(db, Issue_Collection), where('gameId', '==', id))
-}
+export const getIssueFromStore = id =>
+  query(collection(db, Issue_Collection), where('gameId', '==', id))

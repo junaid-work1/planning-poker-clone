@@ -50,9 +50,7 @@ export const updatePlayerValue = async (gameId, playerId, value) => {
   return false
 }
 
-export const isCurrentPlayerInGame = gameId => {
-  return isGameInPlayerCache(gameId)
-}
+export const isCurrentPlayerInGame = gameId => isGameInPlayerCache(gameId)
 
 export const addPlayerToGame = async (gameId, playerName) => {
   const joiningGame = await getGameFromStore(gameId)
