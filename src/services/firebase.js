@@ -4,6 +4,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   updateEmail,
+  updatePassword,
   updateProfile
 } from 'firebase/auth'
 import {
