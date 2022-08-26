@@ -159,7 +159,7 @@ const GameTable = ({ activeUser }) => {
             </span>
           </div>
         )}
-        <div className='w-1/4 h-40 rounded-2xl flex flex-col space-y-10 justify-center items-center bg-blue-100'>
+        <div className='sm:w-1/4 w-1/2 h-40 rounded-2xl flex flex-col space-y-10 justify-center items-center bg-blue-100'>
           {game?.gameStatus === 'Started' && (
             <p className='font-bold text-gray-400 underline text-lg'>Pick a card!</p>
           )}

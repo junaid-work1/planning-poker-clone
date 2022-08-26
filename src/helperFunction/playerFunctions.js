@@ -1,6 +1,5 @@
 import { ulid } from 'ulid'
 import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 
 import {
   addPlayersToStore,
@@ -17,6 +16,8 @@ import {
   updatePlayerGamesInCache
 } from './localStorage'
 import { status } from 'constants/inputLists'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 export const updatePlayerOfGames = (gameId, playerId) => {
   let playerGames = getPlayerGamesFromCache()

@@ -6,7 +6,6 @@ import PropTypes from 'prop-types'
 import { signUpWithEmails } from 'services/firebase'
 import Button from 'components/elements/Button'
 import Input from 'components/elements/Input'
-
 import { authModalStyles } from 'constants/customStyle'
 
 const SignUp = ({ handleModal, modalIsOpen, getDisplayName }) => {

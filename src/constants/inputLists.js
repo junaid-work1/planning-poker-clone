@@ -12,13 +12,13 @@ export const contactModalinputList = [
   {
     name: 'name',
     type: 'text',
-    placeholder: 'Your name (optional)',
+    placeholder: 'Your name',
     styling: 'w-full mt-1 mb-3 p-2 border-2 border-gray-300 rounded-md'
   },
   {
     name: 'email',
     type: 'email',
-    placeholder: 'Your email (optional)',
+    placeholder: 'Your email',
     styling: 'w-full mt-1 mb-3 p-2 border-2 border-gray-300 rounded-md'
   }
 ]

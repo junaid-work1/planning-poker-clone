@@ -3,9 +3,9 @@ import { FaCanadianMapleLeaf } from 'react-icons/fa'
 import { footerListItem } from 'constants/inputLists'
 
 const Footer = () => (
-  <div className='footer-main bg-color-dark-blue w-full h-96'>
+  <div className='footer-main bg-color-dark-blue sm:w-full h-96'>
     <div className='flex justify-around items-center'>
-      <div className='footer-right h-60 mt-14 flex space-x-3'>
+      <div className='footer-right h-60 mt-14 flex sm:space-x-3'>
         <span className='text-4xl text-blue-500'>
           <FaCanadianMapleLeaf />
         </span>
@@ -14,7 +14,7 @@ const Footer = () => (
           <p className='text-white text-sm font-bold'>Planning Poker Online</p>
         </div>
       </div>
-      <div className='footer-left flex space-x-20'>
+      <div className='footer-left flex sm:space-x-20'>
         {footerListItem.map((item, index) => (
           <ul className='text-white space-y-6' key={index.toString() + 1}>
             {item.map((subItem, subIndex) => (

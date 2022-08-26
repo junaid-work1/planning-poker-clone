@@ -1,6 +1,5 @@
 import { ulid } from 'ulid'
 import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 
 import {
   addGameToStore,
@@ -11,6 +10,8 @@ import {
 } from '../services/firebase'
 import { resetPlayers, updatePlayerOfGames } from './playerFunctions'
 import { status } from 'constants/inputLists'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 export const addNewGame = async game => {
   const gameId = ulid()

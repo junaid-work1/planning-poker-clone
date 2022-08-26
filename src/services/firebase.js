@@ -1,14 +1,10 @@
 import {
   createUserWithEmailAndPassword,
+  getAuth,
   signInWithEmailAndPassword,
+  updateEmail,
   updateProfile
 } from 'firebase/auth'
-import { ulid } from 'ulid'
-import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-
-import { auth, db } from 'firebaseConfig'
-import { Game_Collection, Player_Collection, Issue_Collection } from 'constants/collectionName'
 import {
   arrayUnion,
   collection,
@@ -21,6 +17,13 @@ import {
   updateDoc,
   where
 } from 'firebase/firestore'
+import { ulid } from 'ulid'
+import { toast } from 'react-toastify'
+import { auth, db } from 'firebaseConfig'
+
+import { Game_Collection, Player_Collection, Issue_Collection } from 'constants/collectionName'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 export const signInWithEmail = (
   getDisplayName,
@@ -164,3 +167,70 @@ export const getAllPlayersFromStore = id =>
 
 export const getIssueFromStore = id =>
   query(collection(db, Issue_Collection), where('gameId', '==', id))
+
+export const changeProfileNameInStore = (
+  name,
+  setBooleanStates,
+  booleanStates,
+  getDisplayName,
+  setAccountData
+) => {
+  const auth = getAuth()
+
+  if (name) {
+    updateProfile(auth.currentUser, {
+      displayName: name
+    }).then(() => {
+      setBooleanStates({ ...booleanStates, nameDiv: !booleanStates.nameDiv })
+      getDisplayName()
+      setAccountData({ name: '', email: '', password: '' })
+    })
+  }
+}
+
+export const changeEmailInStore = (
+  email,
+  setBooleanStates,
+  booleanStates,
+  getDisplayName,
+  setAccountData
+) => {
+  const auth = getAuth()
+  const newEmail = email
+  if (email) {
+    updateEmail(auth.currentUser, newEmail).then(() => {
+      setBooleanStates({ ...booleanStates, emailDiv: !booleanStates.emailDiv })
+      getDisplayName()
+      setAccountData({ name: '', email: '', password: '' })
+    })
+  }
+}
+
+export const changePasswordInStore = (
+  password,
+  setBooleanStates,
+  booleanStates,
+  setAccountData
+) => {
+  const auth = getAuth()
+  const user = auth.currentUser
+  const newPassword = password
+
+  if (password) {
+    updatePassword(user, newPassword).then(() => {
+      setBooleanStates({ ...booleanStates, passwordDiv: !booleanStates.passwordDiv })
+      setAccountData({ name: '', email: '', password: '' })
+    })
+  }
+}
+
+export const deleteUserFromStore = (handleModal, getDisplayName, setAccountData) => {
+  const auth = getAuth()
+  const user = auth.currentUser
+
+  deleteUser(user).then(() => {
+    handleModal()
+    getDisplayName()
+    setAccountData({ name: '', email: '', password: '' })
+  })
+}

@@ -1,7 +1,7 @@
 import { brandsArray } from 'constants/imgArray'
 
 const Brands = () => (
-  <div className='mb-16'>
+  <div className='sm:mb-16 sm:block hidden'>
     <div className='brands-title text-center pt-20'>
       <h1 className='text-4xl font-bold'>Thousands of teams trust weagileyou worldwide</h1>
     </div>

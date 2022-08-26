@@ -10,16 +10,19 @@ import Button from 'components/elements/Button'
 import ContactModal from 'components/contactModal/ContactModal'
 import Login from 'pages/auth/Login'
 import SignUp from 'pages/auth/SignUp'
+import AccountSetting from 'components/account/AccountSetting'
 
-const Navbar = ({ activeUser, getDisplayName }) => {
+const Navbar = ({ activeUser, getDisplayName, userEmail }) => {
   const [show, setShow] = useState(false)
   const [modalIsOpen, setIsOpen] = useState(false)
   const [loginmodalIsOpen, setLoginmodalIsOpen] = useState(false)
   const [signUpmodalIsOpen, setSignUpmodalIsOpen] = useState(false)
+  const [accountmodalIsOpen, setAccountmodalIsOpen] = useState(false)
 
   const handleModal = () => setIsOpen(!modalIsOpen)
   const loginHandleModal = () => setLoginmodalIsOpen(!loginmodalIsOpen)
   const signUpHandleModal = () => setSignUpmodalIsOpen(!signUpmodalIsOpen)
+  const accountHandleModal = () => setAccountmodalIsOpen(!accountmodalIsOpen)
 
   const logOut = () => {
     signOut(auth)
@@ -39,6 +42,7 @@ const Navbar = ({ activeUser, getDisplayName }) => {
       style: 'text-gray-700 block px-4 py-2 text-sm cursor-pointer hover:bg-gray-200',
       functionCall: function () {
         setShow(!show)
+        accountHandleModal()
       },
       title: 'My account'
     },
@@ -117,13 +121,13 @@ const Navbar = ({ activeUser, getDisplayName }) => {
 
   return (
     <>
-      <div className='navbar-main px-6 py-5 flex justify-between fixed bg-white w-full'>
+      <div className='navbar-main px-6 py-5 flex justify-between sm:fixed bg-white w-full'>
         <div className='navbar-right flex items-center space-x-3'>
-          <span className='text-4xl text-blue-500'>
+          <span className='sm:text-4xl text-blue-500 text-4xl'>
             <FaCanadianMapleLeaf />
           </span>
           <div>
-            <p className='font-bold text-blue-500 text-xl'>we agile you</p>
+            <p className='font-bold text-blue-500 sm:text-xl'>we agile you</p>
             <p className='text-gray-600 text-sm font-bold'>Planning Poker Online</p>
           </div>
         </div>
@@ -131,7 +135,7 @@ const Navbar = ({ activeUser, getDisplayName }) => {
           {activeUser ? activeUserBtn : signUpOptions}
           <Link to='/creategame'>
             <Button
-              className='bg-blue-500 px-5 py-3 borde text-white font-bold rounded-md hover:bg-blue-400'
+              className='bg-blue-500 px-5 py-3 borde text-white font-bold rounded-md hover:bg-blue-400 sm:block hidden'
               title='Start New Game'
             />
           </Link>
@@ -148,6 +152,13 @@ const Navbar = ({ activeUser, getDisplayName }) => {
         modalIsOpen={signUpmodalIsOpen}
         getDisplayName={getDisplayName}
       />
+      <AccountSetting
+        handleModal={accountHandleModal}
+        modalIsOpen={accountmodalIsOpen}
+        getDisplayName={getDisplayName}
+        userEmail={userEmail}
+        activeUser={activeUser}
+      />
       <Outlet />
     </>
   )
@@ -155,6 +166,7 @@ const Navbar = ({ activeUser, getDisplayName }) => {
 
 Navbar.propTypes = {
   activeUser: PropTypes.string,
+  userEmail: PropTypes.string,
   getDisplayName: PropTypes.func
 }
 

@@ -8,9 +8,9 @@ import HeroPage from 'components/hero-page/HeroPage'
 import Navbar from 'components/navbar/Navbar'
 import Planning from 'components/planning/Planning'
 
-const Home = ({ activeUser, getDisplayName }) => (
+const Home = ({ activeUser, getDisplayName, userEmail }) => (
   <>
-    <Navbar activeUser={activeUser} getDisplayName={getDisplayName} />
+    <Navbar activeUser={activeUser} getDisplayName={getDisplayName} userEmail={userEmail} />
     <HeroPage />
     <Planning />
     <GameSteps />
@@ -22,7 +22,8 @@ const Home = ({ activeUser, getDisplayName }) => (
 
 Home.propTypes = {
   activeUser: PropTypes.string,
-  getDisplayName: PropTypes.func
+  getDisplayName: PropTypes.func,
+  userEmail: PropTypes.string
 }
 
 export default Home

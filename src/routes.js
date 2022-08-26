@@ -9,17 +9,25 @@ import JoinGameSession from 'pages/join-game/JoinGameSession'
 
 const AllRoutes = () => {
   const [userName, setUserName] = useState('')
+  const [userEmail, setUserEmail] = useState('')
 
   const getDisplayName = () => {
     auth.onAuthStateChanged(user => {
       if (user) {
         setUserName(user.displayName)
-      } else setUserName('')
+        setUserEmail(user.email)
+      } else {
+        setUserName('')
+        setUserEmail('')
+      }
     })
   }
 
   const route = [
-    { path: '/*', element: <Home activeUser={userName} getDisplayName={getDisplayName} /> },
+    {
+      path: '/*',
+      element: <Home activeUser={userName} getDisplayName={getDisplayName} userEmail={userEmail} />
+    },
     { path: 'creategame', element: <CreateGame activeUser={userName} /> },
     { path: '/joingamesession/:id', element: <JoinGameSession activeUser={userName} /> },
     { path: 'gametable/:id', element: <GameTable activeUser={userName} /> }

@@ -2,8 +2,8 @@ import { useState } from 'react'
 
 import Button from 'components/elements/Button'
 import ContactModal from 'components/contactModal/ContactModal'
-
 import { contactBtnStyle } from 'constants/customStyle'
+
 import ContactUs from 'assets/images/Contact-us.svg'
 
 const Contact = () => {
@@ -13,7 +13,7 @@ const Contact = () => {
 
   return (
     <>
-      <div className='flex justify-center items-center p-10 bg-gray-50'>
+      <div className='flex justify-center items-center sm:p-10 bg-gray-50'>
         <div className='contact-us-right w-2/4 px-10 py-16 mt-5'>
           <div className='contact-us-content mb-14'>
             <div className='space-y-10'>
