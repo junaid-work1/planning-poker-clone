@@ -7,7 +7,7 @@ export const authModalStyles = {
     right: 'auto',
     top: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '30%'
+    width: 'full'
   },
   overlay: {
     background: 'rgba(71,84,93,0.8)'
@@ -26,7 +26,7 @@ export const ContactModalStyles = {
     right: 'auto',
     top: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '40%'
+    width: 'full'
   },
   overlay: {
     background: 'rgba(71,84,93,0.8)'
@@ -42,7 +42,7 @@ export const AccountSettingStyles = {
     right: 'auto',
     top: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '40%'
+    width: 'full'
   },
   overlay: {
     background: 'rgba(71,84,93,0.8)'
