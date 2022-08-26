@@ -42,7 +42,7 @@ export const AccountSettingStyles = {
     right: 'auto',
     top: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 'full'
+    width: 'auto'
   },
   overlay: {
     background: 'rgba(71,84,93,0.8)'

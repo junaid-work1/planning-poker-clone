@@ -123,7 +123,7 @@ const AccountSetting = ({ handleModal, modalIsOpen, getDisplayName, userEmail, a
         value={accountData.name}
         onChange={changeHandle}
       />
-      <div className='space-x-10 text-center'>
+      <div className='space-x-5 text-center'>
         {nameDivBtnList.map((item, index) => (
           <Button
             key={index.toString() + 1}
@@ -141,7 +141,7 @@ const AccountSetting = ({ handleModal, modalIsOpen, getDisplayName, userEmail, a
       <p className='text-md font-bold'>Email</p>
       <div className='flex justify-between'>
         {userEmail}
-        <a className='text-blue-400 font-bold cursor-pointer' onClick={changeEmailHandler}>
+        <a className='text-blue-400 ml-4 font-bold cursor-pointer' onClick={changeEmailHandler}>
           Change
         </a>
       </div>
@@ -158,7 +158,7 @@ const AccountSetting = ({ handleModal, modalIsOpen, getDisplayName, userEmail, a
         value={accountData.email}
         onChange={changeHandle}
       />
-      <div className='space-x-10 text-center'>
+      <div className='space-x-5 text-center'>
         {emailDivBtnList.map((item, index) => (
           <Button
             key={index.toString() + 1}
@@ -194,7 +194,7 @@ const AccountSetting = ({ handleModal, modalIsOpen, getDisplayName, userEmail, a
         onChange={changeHandle}
       />
 
-      <div className='space-x-10 text-center'>
+      <div className='space-x-5 text-center'>
         {passwordDivBtnList.map((item, index) => (
           <Button
             key={index.toString() + 1}
