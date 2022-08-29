@@ -127,8 +127,8 @@ const Navbar = ({ activeUser, getDisplayName, userEmail }) => {
             <FaCanadianMapleLeaf />
           </span>
           <div>
-            <p className='font-bold text-blue-500 sm:text-xl'>we agile you</p>
-            <p className='text-gray-600 text-sm font-bold'>Planning Poker Online</p>
+            <p className='font-bold text-blue-500 sm:text-xl'>Online</p>
+            <p className='text-gray-600 text-sm font-bold'>Scrum With Fun</p>
           </div>
         </div>
         <div className='navbar-right flex items-center space-x-7'>
