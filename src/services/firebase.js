@@ -23,7 +23,7 @@ import { ulid } from 'ulid'
 import { toast } from 'react-toastify'
 import { auth, db } from 'firebaseConfig'
 
-import { Game_Collection, Player_Collection, Issue_Collection } from 'constants/collectionName'
+import { GAME_COLLECTION, PLAYER_COLLECTION, ISSUE_COLLECTION } from 'constants/collectionName'
 
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -80,17 +80,15 @@ export const signUpWithEmails = (
     })
 }
 
-const gamesCollectionName = collection(db, Game_Collection)
-const playersCollectionName = collection(db, Player_Collection)
-const issueCollectionName = collection(db, Issue_Collection)
+const gamesCollectionName = collection(db, GAME_COLLECTION)
+const playersCollectionName = collection(db, PLAYER_COLLECTION)
+const issueCollectionName = collection(db, ISSUE_COLLECTION)
 
-export const addGameToStore = async (gameId, data) => {
+export const addGameToStore = async (gameId, data) =>
   await setDoc(doc(gamesCollectionName, gameId), data)
-  return true
-}
 
 export const getGameFromStore = async id => {
-  const docRef = doc(db, Game_Collection, id)
+  const docRef = doc(db, GAME_COLLECTION, id)
   const result = await getDoc(docRef)
   let game = undefined
   if (result.exists) {
@@ -101,7 +99,6 @@ export const getGameFromStore = async id => {
 
 export const addPlayersToStore = async (playerId, data) => {
   await setDoc(doc(playersCollectionName, playerId), data)
-  return true
 }
 
 export const updatePlayerInGameInStore = async (id, data) => {
@@ -114,19 +111,15 @@ export const updatePlayerInGameInStore = async (id, data) => {
 export const addIssueToStore = async (gameId, title) => {
   const issue = { id: ulid(), title, gameId }
   setDoc(doc(issueCollectionName, issue.id), issue)
-
-  return true
 }
 
 export const deleteIssueToStore = async (id, gameId) => {
-  await deleteDoc(doc(db, Issue_Collection, id))
+  await deleteDoc(doc(db, ISSUE_COLLECTION, id))
   getIssueFromStore(gameId)
-
-  return true
 }
 
 export const getPlayerFromStore = async (gameId, playerId) => {
-  const docRef = doc(db, Player_Collection, playerId)
+  const docRef = doc(db, PLAYER_COLLECTION, playerId)
   const docData = await getDoc(docRef)
   let player = undefined
   if (docData.exists()) {
@@ -137,15 +130,12 @@ export const getPlayerFromStore = async (gameId, playerId) => {
   return player
 }
 
-export const updatePlayerInStore = async (gameId, player) => {
-  await setDoc(doc(db, Player_Collection, player.id), player)
-
-  return true
-}
+export const updatePlayerInStore = async (gameId, player) =>
+  await setDoc(doc(db, PLAYER_COLLECTION, player.id), player)
 
 export const getPlayersFromStore = async gameId => {
   let players = []
-  const getPlayerQuery = query(collection(db, Player_Collection), where('gameId', '==', gameId))
+  const getPlayerQuery = query(collection(db, PLAYER_COLLECTION), where('gameId', '==', gameId))
   const docData = await getDocs(getPlayerQuery)
   docData.forEach(doc => {
     players.push(doc.data())
@@ -155,20 +145,18 @@ export const getPlayersFromStore = async gameId => {
 }
 
 export const updateGameDataInStore = async (gameId, data) => {
-  const docRef = doc(db, Game_Collection, gameId)
+  const docRef = doc(db, GAME_COLLECTION, gameId)
   await updateDoc(docRef, data)
-
-  return true
 }
 
 export const getCompleteGameData = id =>
-  query(collection(db, Game_Collection), where('id', '==', id))
+  query(collection(db, GAME_COLLECTION), where('id', '==', id))
 
 export const getAllPlayersFromStore = id =>
-  query(collection(db, Player_Collection), where('gameId', '==', id))
+  query(collection(db, PLAYER_COLLECTION), where('gameId', '==', id))
 
 export const getIssueFromStore = id =>
-  query(collection(db, Issue_Collection), where('gameId', '==', id))
+  query(collection(db, ISSUE_COLLECTION), where('gameId', '==', id))
 
 export const changeProfileNameInStore = (
   name,

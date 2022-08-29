@@ -17,7 +17,7 @@ export const authModalStyles = {
 export const contactBtnStyle =
   'text-blue-400 font-bold px-6 py-2 border-2 border-solid border-blue-400 rounded-md hover:bg-blue-50'
 
-export const ContactModalStyles = {
+export const contactModalStyles = {
   content: {
     borderRadius: '20px',
     bottom: 'auto',
@@ -33,7 +33,7 @@ export const ContactModalStyles = {
   }
 }
 
-export const AccountSettingStyles = {
+export const accountSettingStyles = {
   content: {
     borderRadius: '20px',
     bottom: 'auto',
@@ -49,5 +49,5 @@ export const AccountSettingStyles = {
   }
 }
 
-export const ContactModalBtnStyle =
+export const contactModalBtnStyle =
   'h-10 w-full px-5 text-white font-bold bg-blue-500 rounded-lg transition-colors duration-150 focus:shadow-outline hover:bg-blue-300'

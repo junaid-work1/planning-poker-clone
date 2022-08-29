@@ -7,14 +7,13 @@ import PropTypes from 'prop-types'
 import { contactModalinputList } from 'constants/inputLists'
 import Button from 'components/elements/Button'
 import Input from 'components/elements/Input'
-import { ContactModalBtnStyle, ContactModalStyles } from 'constants/customStyle'
+import { contactModalBtnStyle, contactModalStyles } from 'constants/customStyle'
 
 const ContactModal = ({ handleModal, modalIsOpen }) => {
   const form = useRef()
 
   const sendEmail = e => {
     e.preventDefault()
-
     emailjs.sendForm('service_2uwgcxa', 'template_hzah24o', form.current, '5Hq4RD_4RiUF9I990').then(
       result => {
         toast.info(`mail is sent. ${result.text}!`, { theme: 'colored' })
@@ -30,7 +29,7 @@ const ContactModal = ({ handleModal, modalIsOpen }) => {
       isOpen={modalIsOpen}
       ariaHideApp={false}
       onRequestClose={handleModal}
-      style={ContactModalStyles}
+      style={contactModalStyles}
     >
       <div className='w-full mx-auto p-10 relative'>
         <div
@@ -58,7 +57,7 @@ const ContactModal = ({ handleModal, modalIsOpen }) => {
               required
             />
           </div>
-          <Button className={ContactModalBtnStyle} type='submit' title='Contact Us' />
+          <Button className={contactModalBtnStyle} type='submit' title='Contact Us' />
         </form>
       </div>
     </Modal>

@@ -65,10 +65,8 @@ export const getAverage = players => {
   return Math.round(values / numOfPlayers)
 }
 
-export const updateGame = async (gameId, updatedGame) => {
+export const updateGame = async (gameId, updatedGame) =>
   await updateGameDataInStore(gameId, updatedGame)
-  return true
-}
 
 export const getGame = id => getGameFromStore(id)
 

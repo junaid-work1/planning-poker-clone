@@ -5,8 +5,8 @@ import { toast } from 'react-toastify'
 import PropTypes from 'prop-types'
 import ReactLoading from 'react-loading'
 
-import { addPlayerToGame, isCurrentPlayerInGame } from 'helperFunction/playerFunctions'
-import { getGame } from 'helperFunction/gameFunctions'
+import { addPlayerToGame, isCurrentPlayerInGame } from 'helpers/playerFunctions'
+import { getGame } from 'helpers/gameFunctions'
 import Button from 'components/elements/Button'
 import Input from 'components/elements/Input'
 
@@ -35,7 +35,7 @@ const JoinGameSession = () => {
       name: 'playerName',
       value: newSessionData.playerName,
       styling: 'border border-gray-300 p-3 w-full rounded-lg',
-      placeholder: 'Enter the loged in user',
+      placeholder: 'Enter name',
       isDisabled: false
     }
   ]
