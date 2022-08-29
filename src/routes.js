@@ -8,29 +8,30 @@ import Home from 'pages/home/Home'
 import JoinGameSession from 'pages/join-game/JoinGameSession'
 
 const AllRoutes = () => {
-  const [userName, setUserName] = useState('')
-  const [userEmail, setUserEmail] = useState('')
+  const [userData, setUserData] = useState({ userName: '', userEmail: '' })
 
   const getDisplayName = () => {
     auth.onAuthStateChanged(user => {
       if (user) {
-        setUserName(user.displayName)
-        setUserEmail(user.email)
-      } else {
-        setUserName('')
-        setUserEmail('')
-      }
+        setUserData({ userName: user.displayName, userEmail: user.email })
+      } else setUserData({ userName: '', userEmail: '' })
     })
   }
 
-  const route = [
+  const routes = [
     {
       path: '/*',
-      element: <Home activeUser={userName} getDisplayName={getDisplayName} userEmail={userEmail} />
+      element: (
+        <Home
+          activeUser={userData.userName}
+          getDisplayName={getDisplayName}
+          userEmail={userData.userEmail}
+        />
+      )
     },
-    { path: 'creategame', element: <CreateGame activeUser={userName} /> },
-    { path: '/joingamesession/:id', element: <JoinGameSession activeUser={userName} /> },
-    { path: 'gametable/:id', element: <GameTable activeUser={userName} /> }
+    { path: 'creategame', element: <CreateGame activeUser={userData.userName} /> },
+    { path: '/joingamesession/:id', element: <JoinGameSession activeUser={userData.userName} /> },
+    { path: 'gametable/:id', element: <GameTable activeUser={userData.userName} /> }
   ]
 
   useEffect(() => {
@@ -40,7 +41,7 @@ const AllRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {route.map(item => (
+        {routes.map(item => (
           <Route path={item.path} element={item.element} key={item.path} />
         ))}
       </Routes>

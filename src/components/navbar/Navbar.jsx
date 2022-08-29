@@ -7,10 +7,10 @@ import { signOut } from 'firebase/auth'
 import PropTypes from 'prop-types'
 
 import Button from 'components/elements/Button'
-import ContactModal from 'components/contactModal/ContactModal'
+import ContactModal from 'pages/contactModal/ContactModal'
 import Login from 'pages/auth/Login'
 import SignUp from 'pages/auth/SignUp'
-import AccountSetting from 'components/account/AccountSetting'
+import AccountSetting from 'pages/account/AccountSetting'
 
 const Navbar = ({ activeUser, getDisplayName, userEmail }) => {
   const [show, setShow] = useState(false)

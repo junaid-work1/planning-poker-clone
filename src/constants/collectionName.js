@@ -1,3 +1,3 @@
-export const Game_Collection = 'games'
-export const Player_Collection = 'players'
-export const Issue_Collection = 'issues'
+export const GAME_COLLECTION = 'games'
+export const PLAYER_COLLECTION = 'players'
+export const ISSUE_COLLECTION = 'issues'

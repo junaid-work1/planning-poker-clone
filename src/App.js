@@ -1,5 +1,7 @@
-import AllRoutes from 'routes'
 import { ToastContainer } from 'react-toastify'
+
+import AllRoutes from 'routes'
+
 const App = () => (
   <>
     <ToastContainer

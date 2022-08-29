@@ -10,7 +10,7 @@ import {
 } from 'services/firebase'
 import Button from 'components/elements/Button'
 import Input from 'components/elements/Input'
-import { AccountSettingStyles } from 'constants/customStyle'
+import { accountSettingStyles } from 'constants/customStyle'
 
 const AccountSetting = ({ handleModal, modalIsOpen, getDisplayName, userEmail, activeUser }) => {
   const [accountData, setAccountData] = useState({ name: '', email: '', password: '' })
@@ -212,7 +212,7 @@ const AccountSetting = ({ handleModal, modalIsOpen, getDisplayName, userEmail, a
       isOpen={modalIsOpen}
       ariaHideApp={false}
       onRequestClose={handleModal}
-      style={AccountSettingStyles}
+      style={accountSettingStyles}
     >
       <p className='text-lg font-bold'>My Account</p>
       <div className='w-full mx-auto p-10 relative'>
