@@ -32,9 +32,7 @@ const GameTable = ({ activeUser }) => {
 
   const handleCopyURL = () => {
     const url = window.location.href
-    const pathname = new URL(url).pathname
-    let [, , pathId] = pathname.split('/')
-    const requireURL = `http://localhost:3000/joingamesession/${pathId}`
+    const requireURL = url.replace('gametable', 'joingamesession')
 
     navigator.clipboard.writeText(requireURL)
     toast.info('Invitation link copied!', { theme: 'colored' })
