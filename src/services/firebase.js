@@ -23,7 +23,12 @@ import { ulid } from 'ulid'
 import { toast } from 'react-toastify'
 import { auth, db } from 'firebaseConfig'
 
-import { GAME_COLLECTION, PLAYER_COLLECTION, ISSUE_COLLECTION } from 'constants/collectionName'
+import {
+  GAME_COLLECTION,
+  PLAYER_COLLECTION,
+  ISSUE_COLLECTION,
+  VOTING_COLLECTION
+} from 'constants/collectionName'
 
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -83,6 +88,7 @@ export const signUpWithEmails = (
 const gamesCollectionName = collection(db, GAME_COLLECTION)
 const playersCollectionName = collection(db, PLAYER_COLLECTION)
 const issueCollectionName = collection(db, ISSUE_COLLECTION)
+const votingCollectionName = collection(db, VOTING_COLLECTION)
 
 export const addGameToStore = async (gameId, data) =>
   await setDoc(doc(gamesCollectionName, gameId), data)
@@ -158,6 +164,9 @@ export const getAllPlayersFromStore = id =>
 export const getIssueFromStore = id =>
   query(collection(db, ISSUE_COLLECTION), where('gameId', '==', id))
 
+export const getVotesFromStore = id =>
+  query(collection(db, VOTING_COLLECTION), where('gameId', '==', id))
+
 export const changeProfileNameInStore = (
   name,
   setBooleanStates,
@@ -223,4 +232,24 @@ export const deleteUserFromStore = (handleModal, getDisplayName, setAccountData)
     getDisplayName()
     setAccountData({ name: '', email: '', password: '' })
   })
+}
+
+export const addVotingHistoryToStore = async (activeIssue, game) => {
+  const votingData = {
+    id: ulid(),
+    gameId: game.id,
+    IssueId: activeIssue.id,
+    issueTitle: activeIssue.title,
+    playerCount: game.player.length,
+    gameName: game.name,
+    average: game.average,
+    createdAt: new Date()
+  }
+
+  await setDoc(doc(votingCollectionName, votingData.id), votingData)
+}
+
+export const deleteVoteToStore = async (id, gameId) => {
+  await deleteDoc(doc(db, VOTING_COLLECTION, id))
+  getVotesFromStore(gameId)
 }
