@@ -1,12 +1,15 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { auth } from 'firebaseConfig'
 import { FaCanadianMapleLeaf } from 'react-icons/fa'
+import { MdOutlineInventory2 } from 'react-icons/md'
 import { FiChevronDown } from 'react-icons/fi'
 import { IoPersonAddOutline } from 'react-icons/io5'
 import { signOut } from 'firebase/auth'
 import PropTypes from 'prop-types'
 
 import Sidebar from 'components/sidebar/Sidebar'
+import HistoryOfTikects from 'pages/history/HistoryOfTikects'
 
 const GameTableHeader = ({
   activeUser,
@@ -15,8 +18,13 @@ const GameTableHeader = ({
   setShow,
   currentPlayerId,
   players,
-  game
+  game,
+  voteList
 }) => {
+  const [isModel, setIsModel] = useState(false)
+
+  const handleHistoryModel = () => setIsModel(!isModel)
+
   const currentUser = () => {
     const [result] = players.filter(item => item.id === currentPlayerId)
     return result?.name
@@ -84,31 +92,46 @@ const GameTableHeader = ({
   )
 
   return (
-    <div className='px-6 py-5 flex justify-between bg-white w-full'>
-      <div className='flex items-center space-x-3'>
-        <span className='text-4xl text-blue-500'>
-          <Link to='/'>
-            <FaCanadianMapleLeaf />
-          </Link>
-        </span>
-        <p className='font-bold text-xl'>{game?.name}</p>
-      </div>
-      <div className='flex items-center'>
-        {activeUser ? gameHeaderRightSide : currentUserLink}
-        <div className='flex'>
-          <span
-            className='flex mx-5 items-center px-5 py-2 borde text-blue-500 font-bold rounded-md border-2 border-blue-500 hover:bg-blue-100 cursor-pointer'
-            onClick={handleCopyURL}
-          >
-            <span className='mr-3 text-lg'>
-              <IoPersonAddOutline />
-            </span>
-            Invite Player
+    <>
+      <div className='px-6 py-5 flex justify-between bg-white w-full'>
+        <div className='flex items-center space-x-3'>
+          <span className='text-4xl text-blue-500'>
+            <Link to='/'>
+              <FaCanadianMapleLeaf />
+            </Link>
           </span>
-          <Sidebar />
+          <p className='font-bold text-xl'>{game?.name}</p>
+          <div
+            className='flex justify-center items-center space-x-3 font-bold text-md cursor-pointer'
+            onClick={handleHistoryModel}
+          >
+            <span className='ml-10 '>History Of Voting</span>
+            <MdOutlineInventory2 />
+          </div>
+        </div>
+
+        <div className='flex items-center'>
+          {activeUser ? gameHeaderRightSide : currentUserLink}
+          <div className='flex'>
+            <span
+              className='flex mx-5 items-center px-5 py-2 borde text-blue-500 font-bold rounded-md border-2 border-blue-500 hover:bg-blue-100 cursor-pointer'
+              onClick={handleCopyURL}
+            >
+              <span className='mr-3 text-lg'>
+                <IoPersonAddOutline />
+              </span>
+              Invite Player
+            </span>
+            <Sidebar />
+          </div>
         </div>
       </div>
-    </div>
+      <HistoryOfTikects
+        modalIsOpen={isModel}
+        handleModal={handleHistoryModel}
+        voteList={voteList}
+      />
+    </>
   )
 }
 
@@ -119,7 +142,8 @@ GameTableHeader.propTypes = {
   setShow: PropTypes.func,
   currentPlayerId: PropTypes.string,
   players: PropTypes.array,
-  game: PropTypes.object
+  game: PropTypes.object,
+  voteList: PropTypes.array
 }
 
 export default GameTableHeader

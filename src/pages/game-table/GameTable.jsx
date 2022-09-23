@@ -7,7 +7,13 @@ import PropTypes from 'prop-types'
 import { Fibonacci } from 'constants/inputLists'
 import { endOfGame, resetGame } from 'helpers/gameFunctions'
 import { getCurrentPlayerId, updatePlayerValue } from 'helpers/playerFunctions'
-import { getAllPlayersFromStore, getCompleteGameData } from 'services/firebase'
+import {
+  addVotingHistoryToStore,
+  getAllPlayersFromStore,
+  getCompleteGameData,
+  getIssueFromStore,
+  getVotesFromStore
+} from 'services/firebase'
 import Button from 'components/elements/Button'
 import GameTableHeader from 'components/game/GameTableHeader'
 
@@ -21,6 +27,8 @@ const GameTable = ({ activeUser }) => {
   const [game, setGame] = useState(undefined)
   const [players, setPlayers] = useState([])
   const [show, setShow] = useState(false)
+  const [issueList, setIssueList] = useState([])
+  const [voteList, setVoteList] = useState([])
 
   const handleFinishGame = () => {
     endOfGame(id)
@@ -28,6 +36,9 @@ const GameTable = ({ activeUser }) => {
 
   const handleRestGame = () => {
     resetGame(id)
+    const result = issueList.filter(element => element.gameId === id)
+    const activeIssue = result[result.length - 1]
+    addVotingHistoryToStore(activeIssue, game)
   }
 
   const handleCopyURL = () => {
@@ -55,6 +66,22 @@ const GameTable = ({ activeUser }) => {
         activePlayers.push(doc.data())
       })
       setPlayers(activePlayers)
+    })
+
+    onSnapshot(getIssueFromStore(id), querySnapshot => {
+      const activeIssues = []
+      querySnapshot.forEach(doc => {
+        activeIssues.push(doc.data())
+      })
+      setIssueList(activeIssues)
+    })
+
+    onSnapshot(getVotesFromStore(id), querySnapshot => {
+      const voteList = []
+      querySnapshot.forEach(doc => {
+        voteList.push(doc.data())
+      })
+      setVoteList(voteList)
     })
 
     const currentPlayerId = getCurrentPlayerId(id)
@@ -144,6 +171,7 @@ const GameTable = ({ activeUser }) => {
         players={players}
         game={game}
         currentPlayerId={currentPlayerId}
+        voteList={voteList}
       />
       <div className='game-table-main flex flex-col items-center justify-center space-y-6 mt-36'>
         {players.length < 1 && (
