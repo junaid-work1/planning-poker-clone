@@ -2,14 +2,15 @@
 
 ## Description
 
-1. First we create a game
-2. A few people join, tell their names
-3. We start voting on different tickets, we input a ticket number(it can be any identifier)
-4. We click on start voting, it allows everyone to pick from a fibonacci range(0-1,2,3,5...)
-5. Votes are hidden(though their is an indication who has voted and who has not)
-6. Than we hit show votes, it finishes voting and shows all votes values
-7. Also it shows an avg value on bottom
-8. We than input next ticket for voting and it continues
+1. Deployed-app-link https://scrum-with-fun.netlify.app/
+2. First we create a game
+3. A few people join, tell their names
+4. We start voting on different tickets, we input a ticket number(it can be any identifier)
+5. We click on start voting, it allows everyone to pick from a fibonacci range(0-1,2,3,5...)
+6. Votes are hidden(though their is an indication who has voted and who has not)
+7. Than we hit show votes, it finishes voting and shows all votes values
+8. Also it shows an avg value on bottom
+9. We than input next ticket for voting and it continues
 
 ## Prerequisites
 
